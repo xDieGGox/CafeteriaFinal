@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:include src="index.xhtml"/>
+        
+        <h:form id="f0">
+            <p:growl/>
+            SIGLA: <p:inputText value="#{medidaBean.medida.medidaSigla}" required="true"/>
+            DESCRIPCIÓN:<p:inputText value="#{medidaBean.medida.medidaDescripcion}" required="true"/>
+            <p:commandButton value="Agregar Tipo Producto" actionListener="#{medidaBean.insertar()}" update="f0"/>
+        
+            <p:dataTable value="#{medidaBean.medidas}" var="m">
+                <p:column headerText="CODIGO">
+                    #{m.medidaId}
+                </p:column>
+                <p:column headerText="SIGLA">
+                    #{m.medidaSigla}
+                </p:column>
+                <p:column headerText="DESCRIPCIÓN">
+                    #{m.medidaDescripcion}
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
