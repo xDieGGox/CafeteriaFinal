@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        <ui:include src="index.xhtml"/>
+
+        <h:form id="f0">
+            <p:growl/>
+            <h:panelGrid columns="2">
+                CÓDIGO: <p:inputText value="#{prodBean.prod.productoId}" required="true"/>
+                NOMBRE: <p:inputText value="#{prodBean.prod.productoDesc}" required="true"/>
+                COSTO UNITARIO: <p:inputText value="#{prodBean.prod.productoCosto}" required="true"/>
+                <p:selectOneMenu value="#{prodBean.codigoTipoProd}">
+                    <f:selectItems value="#{tipProdBean.tiposProducto}" var="tp" itemLabel="#{tp.tipoProductoDesc}" itemValue="#{tp.tipoProductoId}"/>
+                </p:selectOneMenu>
+                <p:selectOneMenu value="#{prodBean.codigoMedida}">
+                    <f:selectItems value="#{medidaBean.medidas}" var="m" itemLabel="#{m.medidaDescripcion}" itemValue="#{m.medidaId}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="Agregar Producto" actionListener="#{prodBean.insertar()}" update="f0"/>
+            </h:panelGrid>
+
+            <p:dataTable value="#{prodBean.productos}" var="p">
+                <p:column headerText="CODIGO">
+                    #{p.productoId}
+                </p:column>
+                <p:column headerText="NOMBRE">
+                    #{p.productoDesc}
+                </p:column>
+                <p:column headerText="COSTO UNITARIO">
+                    #{p.productoCosto}
+                </p:column>
+                <p:column headerText="TIPO PRODUCTO">
+                    #{p.tipoProductoId.tipoProductoDesc}
+                </p:column>
+                <p:column headerText="MEDIDA">
+                    #{p.medidaId.medidaDescripcion}
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+
+    </h:body>
+</html>
+
